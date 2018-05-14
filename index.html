@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <link rel="stylesheet" href="css/materialize.css" type="text/css">
+     <link rel="stylesheet" href="css/materialize.min.css" type="text/css">
+     <title>Doki Doki ATM</title>
+</head>
+<body style="background-color: #B8D8D8; color:black;">
+     <nav style = "background-color:#4F6367;" role="navigation">
+          <div class="nav-wrapper container">
+               <a id="logo-container" href="#" class="brand-logo">Doki Doki Bank</a>
+               <ul class="right hide-on-med-and-down">
+                    <li><a href="#">Salir</a></li>
+               </ul>
+          </div>
+     </div>
+     <div class="container" style="color: black; margin-top:10%;" id="login_scr">
+          <div class="card" style="background-color:#EEF5DB;">
+               <div class="row center">
+                    <h4>Ingrese sus credenciales</h4>
+                    <div class="input-field" style="width:60%; margin-left:20%;">
+                         <input id="user_id" type="text">
+                         <label for="user_id">Nro. de cliente</label>
+                    </div>
+                    <div class="input-field" style="width:60%; margin-left:20%;">
+                         <input id="user_pwd" type="password">
+                         <label for="user_pwd">Contraseña</label>
+                    </div>
+                    <a class="waves-effect waves-light btn" id="submit_btn">Iniciar sesión</a>
+               </div>
+          </div>
+     </div>
+
+     <div class="container" style="color: black; margin-top:10%;" id="atm_scr">
+          <div class="card" style="background-color:#EEF5DB;">
+               <div class="row">
+                    <div class="col s2">
+                         <p><a class="waves-effect waves-light btn-large" id="consultar_btn">Consultar Saldo</a></p>
+                         <p><a class="waves-effect waves-light btn-large" id="extraer_btn">Extraer Dinero</a></p>
+                         <p><a class="waves-effect waves-light btn-large" id="ver_btn">Ver Ultimos Movimientos</a></p>
+                    </div>
+
+                    <div class="col s8">
+                         Medio
+                    </div>
+
+                    <div class="col s2">
+                         <p><a class="waves-effect waves-light btn-large" id="transferir_btn">Realizar Transferencia</a></p>
+                         <p><a class="waves-effect waves-light btn-large" id="depositar_btn">Depositar Dinero</a></p>
+                         <p><a class="waves-effect waves-light btn-large" id="salir_btn">Salir</a></p>
+                    </div>
+
+               </div>
+
+     <script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min
+.js"></script>
+     <script src="js/materialize.js"></script>
+     <script src="js/script.js"></script>
+</body>
+</html>
