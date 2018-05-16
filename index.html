@@ -9,13 +9,10 @@
 <body style="background-color: #B8D8D8; color:black;">
      <nav style = "background-color:#4F6367;" role="navigation">
           <div class="nav-wrapper container">
-               <a id="logo-container" href="#" class="brand-logo">Doki Doki Bank</a>
-               <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Salir</a></li>
-               </ul>
+               <a id="logo-container" href="#" class="brand-logo">Doki Doki Bank ATM</a>
           </div>
      </div>
-     <div class="container" style="color: black; margin-top:10%;" id="login_scr">
+     <div class="container" style="color: black; top:30%; width:60%; left:20%; position:fixed;" id="login_scr">
           <div class="card" style="background-color:#EEF5DB;">
                <div class="row center">
                     <h4>Ingrese sus credenciales</h4>
@@ -32,26 +29,49 @@
           </div>
      </div>
 
-     <div class="container" style="color: black; margin-top:10%;" id="atm_scr">
+     <div class="container" style="color:black; top:30%; width:60%; left:20%; position:fixed;" id="atm_scr">
           <div class="card" style="background-color:#EEF5DB;">
                <div class="row">
-                    <div class="col s2">
-                         <p><a class="waves-effect waves-light btn-large" id="consultar_btn">Consultar Saldo</a></p>
-                         <p><a class="waves-effect waves-light btn-large" id="extraer_btn">Extraer Dinero</a></p>
-                         <p><a class="waves-effect waves-light btn-large" id="ver_btn">Ver Ultimos Movimientos</a></p>
+                    <div class="col s2" style="margin-top:2%;">
+                         <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;"  id="consultar_btn"><h6>Consultar saldo</h6></a></div>
+                         <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;"  id="extraer_btn"><h6>Extraer</h6></a></div>
+                         <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;"  id="ver_btn"><h6>Ultimos Mov.</h6></a></div>
                     </div>
 
-                    <div class="col s8">
-                         Medio
+                    <div class="col s8 center-align">
+                         <div id="consultar_scr">
+                              <div class="card" style="margin-top:18%;background-color:#cfd6be;">
+                                   <h5>Saldo actual: <h5 style="color:green;">100$</h5></h5>
+                              </div>
+                         </div>
+                         <div id="extraer_scr">
+                              <div class="card" style="margin-top:10%;background-color:#cfd6be;">
+                                   <h5>Extraer:</h5>
+                                   <div class="input-field" style="width:60%; margin-left:20%;">
+                                        <input id="cantidad_txt" type="text">
+                                        <label for="user_id">Cantidad</label>
+                                   </div>
+                                   <a class="waves-effect waves-light btn" id="confirmarextraccion_btn">Confirmar</a>
+                              </div>
+                         </div>
                     </div>
 
-                    <div class="col s2">
-                         <p><a class="waves-effect waves-light btn-large" id="transferir_btn">Realizar Transferencia</a></p>
-                         <p><a class="waves-effect waves-light btn-large" id="depositar_btn">Depositar Dinero</a></p>
-                         <p><a class="waves-effect waves-light btn-large" id="salir_btn">Salir</a></p>
+                    <div class="col s2" style="margin-top:2%;">
+                         <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;" id="transferir_btn"><h6>Realizar transf.</h6></a></div>
+                         <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;" id="depositar_btn"><h6>Realizar deposito</h6></a></div>
+                         <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;" id="salir_btn"><h6>Salir</h6></a></div>
                     </div>
 
                </div>
+          </div>
+     </div>
+     <footer class="page-footer grey darken-3" style="bottom:0;width:100%;position:fixed;">
+          <div class="container" style="height:50px;">
+               <div class="valign-wrapper center-align">
+                    <h6 style="margin-left:15%;">Creado por <a href="https://github.com">Milton Torasso</a> y <a href="https://github.com">Joaquín León</a>.</h6>
+               </div>
+          </div>
+     </footer>
 
      <script
 src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min

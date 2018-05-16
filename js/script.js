@@ -1,32 +1,19 @@
-$(function(){
+screens = ["#consultar", "#extraer"]
+
+$(function() {
   $("#atm_scr").hide();
+  screens.forEach(function(e) {
+    $(e + "_scr").hide();
+    $(e + "_btn").click(function() {
+      screens.forEach(function(o) {
+        $(o + "_scr").hide();
+      });
+      $(e + "_scr").show();
+    });
+  });
 });
 
 $("#submit_btn").click(function() {
   $("#login_scr").hide();
   $("#atm_scr").show();
-});
-
-$("#consultar_btn").click(function() {
-
-});
-
-$("#extraer_btn").click(function() {
-
-});
-
-$("#ver_btn").click(function() {
-
-});
-
-$("#transferir_btn").click(function() {
-
-});
-
-$("#depositar_btn").click(function() {
-
-});
-
-$("#salir_btn").click(function() {
-
 });
