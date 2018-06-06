@@ -35,18 +35,87 @@
                     <div class="col s2" style="margin-top:2%;">
                          <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;"  id="consultar_btn"><h6>Consultar saldo</h6></a></div>
                          <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;"  id="extraer_btn"><h6>Extraer</h6></a></div>
-                         <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;"  id="ver_btn"><h6>Ultimos Mov.</h6></a></div>
+                         <div class="row"><a class="waves-effect waves-light btn-large" style="width:100%;"  id="ultimos_btn"><h6>Ultimos Mov.</h6></a></div>
                     </div>
 
                     <div class="col s8 center-align">
                          <div id="consultar_scr">
-                              <div class="card" style="margin-top:18%;background-color:#cfd6be;">
-                                   <h5>Saldo actual: <h5 style="color:green;">100$</h5></h5>
+                              <div class="card" style="margin-top:10%;background-color:#cfd6be">
+                                   <h5><br>Saldo actual: <h5 style="color:green;"><br><br>100$<br><br></h5></h5>
                               </div>
                          </div>
                          <div id="extraer_scr">
+                              <div class="card" style="margin-top:15%;background-color:#cfd6be;">
+                                   <h5><br>Extraer:</h5>
+                                   <div class="input-field" style="width:60%; margin-left:20%;">
+                                        <input id="cantidadextraer_txt" type="text">
+                                        <label for="cantidadextraer_txt">Cantidad</label>
+                                   </div>
+                                   <a class="waves-effect waves-light btn" id="confirmarextraccion_btn">Confirmar</a>
+                              </div>
+                         </div>
+                         <div id="ultimos_scr">
+                              <div class="card" style="margin-top:0;background-color:#cfd6be;">
+                                   <h5><br>Ultimos movimientos de la cuenta:</h5>
+                                   <table>
+                                        <thead>
+                                             <tr style="line-height:6px;">
+                                                  <th>Fecha</th>
+                                                  <th>Cantidad</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr style="line-height:6px;">
+                                                  <td>Alvin</td>
+                                                  <td>Eclair</td>
+                                             </tr>
+                                             <tr style="line-height:6px;">
+                                                  <td>Alan</td>
+                                                  <td>Jellybean</td>
+                                             </tr>
+                                             <tr style="line-height:6px;">
+                                                  <td>Jonathan</td>
+                                                  <td>Lollipop</td>
+                                             </tr>
+                                             <tr style="line-height:6px;">
+                                                  <td>Jonathan</td>
+                                                  <td>Lollipop</td>
+                                             </tr>
+                                             <tr style="line-height:6px;">
+                                                  <td>Jonathan</td>
+                                                  <td>Lollipop</td>
+                                             </tr>
+                                        </tbody>
+                                   </table>
+                              </div>
+                         </div>
+                         <div id="transferir_scr">
+                              <div class="card" style="margin-top:5%;background-color:#cfd6be;">
+                                   <h5><br>Transferir:</h5>
+                                   <div class="input-field" style="width:60%; margin-left:20%;">
+                                        <input id="cantidadtransferir_txt" type="text">
+                                        <label for="cantidadtransferir_txt">Cantidad</label>
+                                   </div>
+                                   <div class="input-field" style="width:60%; margin-left:20%;">
+                                        <input id="cuentatransferir_txt" type="text">
+                                        <label for="cuentatransferir_txt">Cuenta destino</label>
+                                   </div>
+                                   <a class="waves-effect waves-light btn" id="confirmarextraccion_btn">Confirmar</a>
+                              </div>
+                         </div>
+                         <div id="depositar_scr">
+                              <div class="card" style="margin-top:5%;background-color:#cfd6be;">
+                                   <h5><br>Depositar:</h5>
+                                   <div class="input-field" style="width:60%; margin-left:20%;">
+                                        <input id="cantidad_txt" type="text">
+                                        <label for="user_id">Cantidad</label>
+                                   </div>
+                                   <a class="waves-effect waves-light btn" id="confirmarextraccion_btn">Confirmar</a>
+                              </div>
+                         </div>
+                         <div id="salir_scr">
                               <div class="card" style="margin-top:10%;background-color:#cfd6be;">
-                                   <h5>Extraer:</h5>
+                                   <h5><br>Extraer:</h5>
                                    <div class="input-field" style="width:60%; margin-left:20%;">
                                         <input id="cantidad_txt" type="text">
                                         <label for="user_id">Cantidad</label>
