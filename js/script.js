@@ -51,6 +51,7 @@ $("#confirmarextraccion_btn").click(function() {
   creacion_movimiento = Math.floor(Date.now() / 1000)
   importe = $("#cantidadextraer_txt").val()
   numero_cuenta = $("#cuentaextraer_txt").val()
+  cliente_id = 1
 
   if (!$.isNumeric(importe) || !$.isNumeric(numero_cuenta)) {
     $("#extraer_estado").text("El número contiene caracteres no-numericos.")
@@ -68,44 +69,44 @@ $("#confirmarextraccion_btn").click(function() {
         console.log(response)
         cuenta = response
 
-        if (cuenta["cliente_id"] !== cliente_id) {
+        if (cuenta["id_cliente"] !== cliente_id) {
           $("#extraer_estado").text("Número de cuenta incorrecto.")
           return
 
         }
-    }
-    })
-  $.ajax({
-    url: "http://www.mocky.io/v2/5b2253412e00002a00e3162f",
-    type: "GET",
-    dataType:"jsonp",
-    beforeSend: function()   {
-      $("#extraer_estado").text("Cargando...")
-    },
-    success: function(response){
-        console.log(response)
-        saldo_cuenta = response
-
-        if (importe > saldo_cuenta) {
-          $("#extraer_estado").text("Saldo insuficiente.")
-          return
-        }
-
-        movimiento = {"creado": creacion_movimiento,
-        "procesado": Math.floor(Date.now() / 1000),
-        "tipo": 0,
-        "estado": 1,
-        "importe": importe,
-        "id_cuenta": numero_cuenta}
-
         $.ajax({
-          url: "http://www.mocky.io/v2/5b2253622e00007b00e31630",
-          data: movimiento,
-          type: "POST",
+          url: "http://www.mocky.io/v2/5b2253412e00002a00e3162f",
+          type: "GET",
           dataType:"jsonp",
+          beforeSend: function()   {
+            $("#extraer_estado").text("Cargando...")
+          },
           success: function(response){
               console.log(response)
-              $("#extraer_estado").text("Extracción realizada con éxito.")
+              saldo_cuenta = response
+      
+              if (importe > saldo_cuenta) {
+                $("#extraer_estado").text("Saldo insuficiente.")
+                return
+              }
+      
+              movimiento = {"creado": creacion_movimiento,
+              "procesado": Math.floor(Date.now() / 1000),
+              "tipo": 0,
+              "estado": 1,
+              "importe": importe,
+              "id_cuenta": numero_cuenta}
+      
+              $.ajax({
+                url: "http://www.mocky.io/v2/5b2253622e00007b00e31630",
+                data: movimiento,
+                type: "POST",
+                dataType:"jsonp",
+                success: function(response){
+                    console.log(response)
+                    $("#extraer_estado").text("Extracción realizada con éxito.")
+                }
+                })
           }
           })
     }
