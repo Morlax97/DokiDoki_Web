@@ -166,7 +166,7 @@ $("#confirmartransferencia_btn").click(function() {
   }
 
   $.ajax({
-    url: "url",
+    url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
     type: "GET",
     dataType:"jsonp",
     beforeSend: function() {
@@ -175,17 +175,17 @@ $("#confirmartransferencia_btn").click(function() {
     success: function(response){
         console.log(response)
         cuenta_origen = response
+        if (cuenta_origen["id_cliente"] != cliente_id) {
+          $("#transferir_estado").text("Número de cuenta de origen incorrecto.")
+          return
+        }
         $.ajax({
-          url: "url",
+          url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
           type: "GET",
           dataType:"jsonp",
-          beforeSend: function() {
-            $("#transferir_estado").text("Cargando...")
-          },
           success: function(response){
               console.log(response)
               cuenta_destino = response
-
               movimiento = {"creado": creacion_movimiento,
               "procesado": Math.floor(Date.now() / 1000),
               "tipo": 0,
@@ -194,7 +194,7 @@ $("#confirmartransferencia_btn").click(function() {
               "id_cuenta": numero_cuenta_origen}
 
               $.ajax({
-                url: "url",
+                url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
                 data: movimiento,
                 type: "POST",
                 dataType:"jsonp",
@@ -208,13 +208,13 @@ $("#confirmartransferencia_btn").click(function() {
                     "id_cuenta": numero_cuenta_destino}
 
                     $.ajax({
-                      url: "url",
+                      url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
                       data: movimiento,
                       type: "POST",
                       dataType:"jsonp",
                       success: function(response){
                           console.log(response)
-                          $("#depositar_estado").text("Deposito realizado con éxito.")
+                          $("#transferir_estado").text("Transferencia realizada con éxito.")
                       }
                       })
                 }
