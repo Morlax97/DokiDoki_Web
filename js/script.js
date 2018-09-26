@@ -51,7 +51,6 @@ $("#confirmarextraccion_btn").click(function() {
   creacion_movimiento = Math.floor(Date.now() / 1000)
   importe = $("#cantidadextraer_txt").val()
   numero_cuenta = $("#cuentaextraer_txt").val()
-  cliente_id = 1
 
   if (!$.isNumeric(importe) || !$.isNumeric(numero_cuenta)) {
     $("#extraer_estado").text("El número contiene caracteres no-numericos.")
