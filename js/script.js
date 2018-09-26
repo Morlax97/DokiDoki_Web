@@ -111,18 +111,18 @@ $("#confirmarextraccion_btn").click(function() {
 
 
 // ------------------------------------------- DEPOSITO ------------------------------------------------//
-$("#confirmarextraccion_btn").click(function() {
-  creacion_movimiento = Math.floor(Date.now() / 1000)
-  importe = $("#cantidaddepositar_txt").val()
-  numero_cuenta = $("#cuentadepositar_txt").val()
+$("#confirmardeposito_btn").click(function() {
+  var creacion_movimiento = Math.floor(Date.now() / 1000)
+  var importe = $("#cantidaddepositar_txt").val()
+  var numero_cuenta = $("#cuentadepositar_txt").val()
 
-  if (!$.isNumeric(importe) || !$.isNumeric(cuenta)) {
+  if (!$.isNumeric(importe) || !$.isNumeric(numero_cuenta)) {
     $("#depositar_estado").text("El número contiene caracteres no-numericos.")
     return
   }
 
   $.ajax({
-    url: "url",
+    url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
     type: "GET",
     dataType:"jsonp",
     beforeSend: function() {
@@ -139,7 +139,8 @@ $("#confirmarextraccion_btn").click(function() {
         "id_cuenta": numero_cuenta}
 
         $.ajax({
-          url: "url",
+          //la url es cualquier cosa
+          url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
           data: movimiento,
           type: "POST",
           dataType:"jsonp",
