@@ -165,6 +165,7 @@ $("#confirmartransferencia_btn").click(function() {
     return
   }
 
+  //obtener cuenta de origen
   $.ajax({
     url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
     type: "GET",
@@ -179,6 +180,9 @@ $("#confirmartransferencia_btn").click(function() {
           $("#transferir_estado").text("Número de cuenta de origen incorrecto.")
           return
         }
+        //chequear que la cuenta de origen tenga suficiente saldo (pendiente)
+
+        //obtener cuenta destino
         $.ajax({
           url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
           type: "GET",
@@ -193,6 +197,7 @@ $("#confirmartransferencia_btn").click(function() {
               "importe": importe,
               "id_cuenta": numero_cuenta_origen}
 
+              //realizar movimiento en cuenta de origen
               $.ajax({
                 url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
                 data: movimiento,
@@ -207,6 +212,8 @@ $("#confirmartransferencia_btn").click(function() {
                     "importe": importe,
                     "id_cuenta": numero_cuenta_destino}
 
+
+                    //realizar movimiento en cuenta destino
                     $.ajax({
                       url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
                       data: movimiento,
