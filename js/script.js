@@ -51,7 +51,6 @@ $("#confirmarextraccion_btn").click(function() {
   creacion_movimiento = Math.floor(Date.now() / 1000)
   importe = $("#cantidadextraer_txt").val()
   numero_cuenta = $("#cuentaextraer_txt").val()
-
   if (!$.isNumeric(importe) || !$.isNumeric(numero_cuenta)) {
     $("#extraer_estado").text("El número contiene caracteres no-numericos.")
     return
@@ -67,8 +66,7 @@ $("#confirmarextraccion_btn").click(function() {
     success: function(response){
         console.log(response)
         cuenta = response
-
-        if (cuenta["id_cliente"] !== cliente_id) {
+        if (cuenta["id_cliente"] != cliente_id) {
           $("#extraer_estado").text("Número de cuenta incorrecto.")
           return
 
@@ -260,3 +258,11 @@ $("#confirmarultimos_btn").click(function() {
 $("#confirmarsalir_btn").click(function(){
   location.reload()
 })
+function newFunction() {
+  extraer();
+}
+
+function extraer() {
+  cliente_id = 1;
+}
+
