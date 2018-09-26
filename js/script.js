@@ -25,8 +25,9 @@ $("#submit_btn").click(function() {
   cliente_id = $("#user_id").val()
 
   $.ajax({
-    url: "http://www.mocky.io/v2/5b22511f2e00006500e31619",
+    url: "https://www.mocky.io/v2/5b22511f2e00006500e31619",
     type: "GET",
+    dataType:"jsonp",
     beforeSend: function() {
       $("<div/>", {class: "progress", id: "loading_bar"}).insertAfter($("#submit_btn"))
       $("#loading_bar").append($("<div/>", {class: "indeterminate"}))
@@ -59,6 +60,7 @@ $("#confirmarextraccion_btn").click(function() {
   $.ajax({
     url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
     type: "GET",
+    dataType:"jsonp",
     beforeSend: function() {
       $("#extraer_estado").text("Cargando...")
     },
@@ -76,6 +78,7 @@ $("#confirmarextraccion_btn").click(function() {
   $.ajax({
     url: "http://www.mocky.io/v2/5b2253412e00002a00e3162f",
     type: "GET",
+    dataType:"jsonp",
     beforeSend: function()   {
       $("#extraer_estado").text("Cargando...")
     },
@@ -99,6 +102,7 @@ $("#confirmarextraccion_btn").click(function() {
           url: "http://www.mocky.io/v2/5b2253622e00007b00e31630",
           data: movimiento,
           type: "POST",
+          dataType:"jsonp",
           success: function(response){
               console.log(response)
               $("#extraer_estado").text("Extracción realizada con éxito.")
@@ -123,6 +127,7 @@ $("#confirmarextraccion_btn").click(function() {
   $.ajax({
     url: "url",
     type: "GET",
+    dataType:"jsonp",
     beforeSend: function() {
       $("#depositar_estado").text("Cargando...")
     },
@@ -140,6 +145,7 @@ $("#confirmarextraccion_btn").click(function() {
           url: "url",
           data: movimiento,
           type: "POST",
+          dataType:"jsonp",
           success: function(response){
               console.log(response)
               $("#depositar_estado").text("Deposito realizado con éxito.")
@@ -164,6 +170,7 @@ $("#confirmartransferencia_btn").click(function() {
   $.ajax({
     url: "url",
     type: "GET",
+    dataType:"jsonp",
     beforeSend: function() {
       $("#transferir_estado").text("Cargando...")
     },
@@ -173,6 +180,7 @@ $("#confirmartransferencia_btn").click(function() {
         $.ajax({
           url: "url",
           type: "GET",
+          dataType:"jsonp",
           beforeSend: function() {
             $("#transferir_estado").text("Cargando...")
           },
@@ -191,6 +199,7 @@ $("#confirmartransferencia_btn").click(function() {
                 url: "url",
                 data: movimiento,
                 type: "POST",
+                dataType:"jsonp",
                 success: function(response){
                     console.log(response)
                     movimiento = {"creado": creacion_movimiento,
@@ -204,6 +213,7 @@ $("#confirmartransferencia_btn").click(function() {
                       url: "url",
                       data: movimiento,
                       type: "POST",
+                      dataType:"jsonp",
                       success: function(response){
                           console.log(response)
                           $("#depositar_estado").text("Deposito realizado con éxito.")
@@ -229,6 +239,7 @@ $("#confirmarultimos_btn").click(function() {
   $.ajax({
     url: "http://www.mocky.io/v2/5b2276372e00007e00e316cf",
     type: "GET",
+    dataType:"jsonp",
     beforeSend: function() {
       $("#ultimos_estado").text("Cargando...")
     },
@@ -242,4 +253,10 @@ $("#confirmarultimos_btn").click(function() {
         $("#depositar_estado").text("Saldo recuperado.")
     }
     })
+})
+
+
+//------------------------------------------ SALIR ---------------------------------------------------////
+$("#confirmarsalir_btn").click(function(){
+  location.reload()
 })
