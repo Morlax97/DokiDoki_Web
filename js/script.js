@@ -19,8 +19,6 @@ $(document).ready(function() {
   })
 })
 
-
-
 $("#submit_btn").click(function() {
   cliente_id = $("#user_id").val()
 
@@ -28,7 +26,7 @@ $("#submit_btn").click(function() {
     alert("El número contiene caracteres no-numericos.")
     return
   }
-  
+
   $.ajax({
     url: "https://www.mocky.io/v2/5b22511f2e00006500e31619",
     type: "GET",
@@ -47,7 +45,7 @@ $("#submit_btn").click(function() {
         $("#loading_bar").remove()
     },
     error: function(){
-      alert("La cuenta ingresada no existe")
+      alert("La cuenta ingresada no existe.")
       location.reload()
     }
     })
@@ -81,15 +79,15 @@ $("#confirmarconsulta_btn").click(function(){
               console.log(response)
               saldo_cuenta = response
               $("#consultar_saldo").text("$" + saldo_cuenta)
-              $("#consultar_estado").text("Consulta realizada con exito")
+              $("#consultar_estado").text("Consulta realizada con exito.")
             },
           error: function(){
-              $("#consultar_estado").text("Error al realizar la consulta")
+              $("#consultar_estado").text("Error al realizar la consulta.")
           }
           })
       },
     error: function() {
-      $("#consultar_estado").text("Número de cuenta incorrecto.")
+      $("#consultar_estado").text("Error al obtener la cuenta.")
       }
   })
 })
@@ -104,8 +102,9 @@ $("#confirmarextraccion_btn").click(function() {
     return
   }
 
+  //Obtener cuenta a extraer
   $.ajax({
-    url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
+    url:"http://www.mocky.io/v2/5b2253032e00009100e3162b",
     type: "GET",
     dataType:"jsonp",
     beforeSend: function() {
@@ -119,12 +118,9 @@ $("#confirmarextraccion_btn").click(function() {
           return
         }
         $.ajax({
-          url: "http://www.mocky.io/v2/5b2253412e00002a00e3162f",
+          url:"http://www.mocky.io/v2/5b2253412e00002a00e3162f",
           type: "GET",
           dataType:"jsonp",
-          beforeSend: function()   {
-            $("#extraer_estado").text("Cargando...")
-          },
           success: function(response){
               console.log(response)
               saldo_cuenta = response
@@ -132,7 +128,6 @@ $("#confirmarextraccion_btn").click(function() {
                 $("#extraer_estado").text("Saldo insuficiente.")
                 return
               }
-      
               movimiento = {"creado": creacion_movimiento,
               "procesado": Math.floor(Date.now() / 1000),
               "tipo": 0,
@@ -145,14 +140,22 @@ $("#confirmarextraccion_btn").click(function() {
                 data: movimiento,
                 type: "POST",
                 dataType:"jsonp",
-                
                 success: function(response){
                     console.log(response)
                     $("#extraer_estado").text("Extracción realizada con éxito.")
+                },
+                error: function(){
+                    $("#extraer_estado").text("Error al realizar la extracción")
                 }
                 })
+          },
+          error: function(){
+            $("#extraer_estado").text("Error al obtener el saldo actual.")
           }
-          })
+        })
+    },
+    error: function(){
+      $("#extraer_estado").text("Error al obtener la cuenta.")
     }
     })
 })
@@ -169,6 +172,7 @@ $("#confirmardeposito_btn").click(function() {
     return
   }
 
+  //Obtener la cuenta a depositar
   $.ajax({
     url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
     type: "GET",
@@ -185,9 +189,9 @@ $("#confirmardeposito_btn").click(function() {
         "estado": 1,
         "importe": importe,
         "id_cuenta": numero_cuenta}
-
+        
+        //Realizar el deposito
         $.ajax({
-          //la url es cualquier cosa
           url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
           data: movimiento,
           type: "POST",
@@ -195,10 +199,16 @@ $("#confirmardeposito_btn").click(function() {
           success: function(response){
               console.log(response)
               $("#depositar_estado").text("Deposito realizado con éxito.")
+          },
+          error: function(){
+            $("#depositar_estado").text("Error al realizar el deposito.")
           }
-          })
+        })
+    },
+    error: function(){
+      $("#depositar_estado").text("Error al obtener la cuenta.")
     }
-    })
+  })
 })
 
 // ------------------------------------------- TRANSFERENCIA ------------------------------------------------//
