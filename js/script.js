@@ -117,6 +117,8 @@ $("#confirmarextraccion_btn").click(function() {
           $("#extraer_estado").text("Número de cuenta incorrecto.")
           return
         }
+
+        //Chequear que la cuenta tenga saldo suficiente
         $.ajax({
           url:"http://www.mocky.io/v2/5b2253412e00002a00e3162f",
           type: "GET",
@@ -134,7 +136,8 @@ $("#confirmarextraccion_btn").click(function() {
               "estado": 1,
               "importe": importe,
               "id_cuenta": numero_cuenta}
-      
+
+              //Realizar la extracción
               $.ajax({
                 url: "http://www.mocky.io/v2/5b2253622e00007b00e31630",
                 data: movimiento,
@@ -238,14 +241,11 @@ $("#confirmartransferencia_btn").click(function() {
           $("#transferir_estado").text("Número de cuenta de origen incorrecto.")
           return
         }
-        //Chequear que la cuenta de origen tenga suficiente saldo (pendiente)
+        //Chequear que la cuenta de origen tenga suficiente saldo
         $.ajax({
           url: "http://www.mocky.io/v2/5b2253412e00002a00e3162f",
           type: "GET",
           dataType:"jsonp",
-          beforeSend: function()   {
-            $("#transferir_estado").text("Cargando...")
-          },
           success: function(response){
               console.log(response)
               saldo_cuenta = response
@@ -293,14 +293,26 @@ $("#confirmartransferencia_btn").click(function() {
                             success: function(response){
                                 console.log(response)
                                 $("#transferir_estado").text("Transferencia realizada con éxito.")
+                            },
+                            error: function(){
+                              $("#transferir_estado").text("Error al realizar la transferencia.")
                             }
                             })
+                      },
+                      error: function(){
+                        $("#transferir_estado").text("Error al realizar la transferencia.")
                       }
-                      })
+                    })
+                    },
+                    error: function(){
+                      $("#transferir_estado").text("Error al obtener cuenta destino.")
                     }
                 })
             }
           })
+    },
+    error: function(){
+      $("#transferir_estado").text("Error al obtener cuenta origen.")
     }
     })
 })
@@ -314,6 +326,7 @@ $("#confirmarultimos_btn").click(function() {
     return
   }
 
+  //Obtener la cuenta a consultar
   $.ajax({
     url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
     type: "GET",
@@ -328,6 +341,7 @@ $("#confirmarultimos_btn").click(function() {
           $("#ultimos_estado").text("Número de cuenta incorrecto.")
           return
         }
+        //Realizar la consulta
         $.ajax({
           url: "http://www.mocky.io/v2/5b2276372e00007e00e316cf",
           type: "GET",
@@ -340,12 +354,17 @@ $("#confirmarultimos_btn").click(function() {
                 $("#t" + (i + 1) + "2").html(response[i]["importe"])
               }
               $("#ultimos_estado").text("Consulta realizada con exito.")
+          },
+          error: function() {
+            $("#ultimos_estado").text("Error al realizar la consulta.")
           }
-          })
+        })
+      },
+      error: function() {
+        $("#ultimos_estado").text("Error al obtener la cuenta.")
       }
     })
 })
-
 
 //------------------------------------------ SALIR ---------------------------------------------------////
 $("#confirmarsalir_btn").click(function(){
@@ -358,4 +377,3 @@ function newFunction() {
 function extraer() {
   cliente_id = 1;
 }
-
