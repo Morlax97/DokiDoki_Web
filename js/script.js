@@ -40,9 +40,12 @@ $("#submit_btn").click(function() {
         $("#login_scr").hide()
         $("#atm_scr").show()
         $("#loading_bar").remove()
+    },
+    error: function(){
+      alert("La cuenta ingresada no existe")
+      location.reload()
     }
     })
-
 })
 
 //-------------------------------------------- CONSULTA --------------------------------------------------//
@@ -66,7 +69,7 @@ $("#confirmarconsulta_btn").click(function(){
         }
         //Obtener saldo cuenta
         $.ajax({
-          url: "http://www.mocky.io/v2/5b2253412e00002a00e3162f",
+          url: http://www.mocky.io/v2/5b2253412e00002a00e3162f",
           type: "GET",
           dataType:"jsonp",
           success: function(response){
@@ -74,10 +77,16 @@ $("#confirmarconsulta_btn").click(function(){
               saldo_cuenta = response
               $("#consultar_saldo").text("$" + saldo_cuenta)
               $("#consultar_estado").text("Consulta realizada con exito")
-            }
+            },
+          error: function(){
+              $("#consultar_estado").text("Error al realizar la consulta")
+          }
           })
+      },
+    error: function() {
+      $("#consultar_estado").text("Número de cuenta incorrecto.")
       }
-    })
+  })
 })
 
 // ------------------------------------------- EXTRACCION ------------------------------------------------//
@@ -291,7 +300,7 @@ $("#confirmarultimos_btn").click(function() {
   }
 
   $.ajax({
-    url: "http://www.mocky.io/v2/5b2276372e00007e00e316cf",
+    url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
     type: "GET",
     dataType:"jsonp",
     beforeSend: function() {
@@ -299,13 +308,26 @@ $("#confirmarultimos_btn").click(function() {
     },
     success: function(response){
         console.log(response)
-        movimientos = response
-        for (i = 0; i < Math.min(response.length, 5); i++) {
-          $("#t" + (i + 1) + "1").html(response[i]["creado"])
-          $("#t" + (i + 1) + "2").html(response[i]["importe"])
+        cuenta = response
+        if (cuenta["id_cliente"] != cliente_id) {
+          $("#ultimos_estado").text("Número de cuenta incorrecto.")
+          return
         }
-        $("#depositar_estado").text("Saldo recuperado.")
-    }
+        $.ajax({
+          url: "http://www.mocky.io/v2/5b2276372e00007e00e316cf",
+          type: "GET",
+          dataType:"jsonp",
+          success: function(response){
+              console.log(response)
+              movimientos = response
+              for (i = 0; i < Math.min(response.length, 4); i++) {
+                $("#t" + (i + 1) + "1").html(response[i]["creado"])
+                $("#t" + (i + 1) + "2").html(response[i]["importe"])
+              }
+              $("#ultimos_estado").text("Consulta realizada con exito.")
+          }
+          })
+      }
     })
 })
 
