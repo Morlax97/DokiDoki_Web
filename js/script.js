@@ -165,7 +165,7 @@ $("#confirmartransferencia_btn").click(function() {
     return
   }
 
-  //obtener cuenta de origen
+  //Obtener cuenta de origen
   $.ajax({
     url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
     type: "GET",
@@ -180,40 +180,37 @@ $("#confirmartransferencia_btn").click(function() {
           $("#transferir_estado").text("Número de cuenta de origen incorrecto.")
           return
         }
-        //chequear que la cuenta de origen tenga suficiente saldo (pendiente)
-
-        //obtener cuenta destino
+        //Chequear que la cuenta de origen tenga suficiente saldo (pendiente)
         $.ajax({
-          url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
+          url: "http://www.mocky.io/v2/5b2253412e00002a00e3162f",
           type: "GET",
           dataType:"jsonp",
+          beforeSend: function()   {
+            $("#transferir_estado").text("Cargando...")
+          },
           success: function(response){
               console.log(response)
-              cuenta_destino = response
-              movimiento = {"creado": creacion_movimiento,
-              "procesado": Math.floor(Date.now() / 1000),
-              "tipo": 0,
-              "estado": 1,
-              "importe": importe,
-              "id_cuenta": numero_cuenta_origen}
-
-              //realizar movimiento en cuenta de origen
+              saldo_cuenta = response
+              if (importe > saldo_cuenta) {
+                $("#transferir_estado").text("Saldo insuficiente.")
+                return
+              }
+              //Obtener cuenta destino
               $.ajax({
                 url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
-                data: movimiento,
-                type: "POST",
+                type: "GET",
                 dataType:"jsonp",
                 success: function(response){
                     console.log(response)
+                    cuenta_destino = response
                     movimiento = {"creado": creacion_movimiento,
                     "procesado": Math.floor(Date.now() / 1000),
-                    "tipo": 1,
+                    "tipo": 0,
                     "estado": 1,
                     "importe": importe,
-                    "id_cuenta": numero_cuenta_destino}
+                    "id_cuenta": numero_cuenta_origen}
 
-
-                    //realizar movimiento en cuenta destino
+                    //Realizar movimiento en cuenta de origen
                     $.ajax({
                       url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
                       data: movimiento,
@@ -221,12 +218,30 @@ $("#confirmartransferencia_btn").click(function() {
                       dataType:"jsonp",
                       success: function(response){
                           console.log(response)
-                          $("#transferir_estado").text("Transferencia realizada con éxito.")
+                          movimiento = {"creado": creacion_movimiento,
+                          "procesado": Math.floor(Date.now() / 1000),
+                          "tipo": 1,
+                          "estado": 1,
+                          "importe": importe,
+                          "id_cuenta": numero_cuenta_destino}
+    
+    
+                          //Realizar movimiento en cuenta destino
+                          $.ajax({
+                            url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
+                            data: movimiento,
+                            type: "POST",
+                            dataType:"jsonp",
+                            success: function(response){
+                                console.log(response)
+                                $("#transferir_estado").text("Transferencia realizada con éxito.")
+                            }
+                            })
                       }
                       })
-                }
+                    }
                 })
-              }
+            }
           })
     }
     })
