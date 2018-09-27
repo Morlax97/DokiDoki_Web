@@ -78,13 +78,7 @@ $("#confirmarconsulta_btn").click(function(){
           })
       }
     })
-
-
-
-
 })
-
-
 
 // ------------------------------------------- EXTRACCION ------------------------------------------------//
 $("#confirmarextraccion_btn").click(function() {
