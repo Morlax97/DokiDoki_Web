@@ -24,6 +24,11 @@ $(document).ready(function() {
 $("#submit_btn").click(function() {
   cliente_id = $("#user_id").val()
 
+  if (!$.isNumeric(cliente_id)) {
+    alert("El número contiene caracteres no-numericos.")
+    return
+  }
+  
   $.ajax({
     url: "https://www.mocky.io/v2/5b22511f2e00006500e31619",
     type: "GET",
@@ -69,7 +74,7 @@ $("#confirmarconsulta_btn").click(function(){
         }
         //Obtener saldo cuenta
         $.ajax({
-          url: http://www.mocky.io/v2/5b2253412e00002a00e3162f",
+          url: "http://www.mocky.io/v2/5b2253412e00002a00e3162f",
           type: "GET",
           dataType:"jsonp",
           success: function(response){
