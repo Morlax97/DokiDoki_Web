@@ -45,6 +45,46 @@ $("#submit_btn").click(function() {
 
 })
 
+//-------------------------------------------- CONSULTA --------------------------------------------------//
+$("#confirmarconsulta_btn").click(function(){
+  numero_cuenta= $("#cuentaconsultar_txt").val()
+
+  //Obtener cuenta consulta
+  $.ajax({
+    url: "http://www.mocky.io/v2/5b2253032e00009100e3162b",
+    type: "GET",
+    dataType:"jsonp",
+    beforeSend: function() {
+      $("#consultar_estado").text("Cargando...")
+    },
+    success: function(response){
+        console.log(response)
+        cuenta = response
+        if (cuenta["id_cliente"] != cliente_id) {
+          $("#consultar_estado").text("Número de cuenta incorrecto.")
+          return
+        }
+        //Obtener saldo cuenta
+        $.ajax({
+          url: "http://www.mocky.io/v2/5b2253412e00002a00e3162f",
+          type: "GET",
+          dataType:"jsonp",
+          success: function(response){
+              console.log(response)
+              saldo_cuenta = response
+              $("#consultar_saldo").text("$" + saldo_cuenta)
+              $("#consultar_estado").text("Consulta realizada con exito")
+            }
+          })
+      }
+    })
+
+
+
+
+})
+
+
 
 // ------------------------------------------- EXTRACCION ------------------------------------------------//
 $("#confirmarextraccion_btn").click(function() {
